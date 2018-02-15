@@ -9,26 +9,31 @@ namespace MyRestApi.Controllers
 {
     public class ValuesController : ApiController
     {
+        static internal string lastPut = "", lastPost = "";
+        static internal string[] value;
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            value = new string[] { $"Post:[{lastPost}]", $"Put:[{lastPut}]" };
+            return value;
         }
 
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            return ($"id = '{id}'");
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public async void Post()
         {
+            lastPost = await Request.Content.ReadAsStringAsync();
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public async void Put()
         {
+            lastPut = await Request.Content.ReadAsStringAsync();
         }
 
         // DELETE api/values/5
