@@ -10,12 +10,11 @@ namespace MyRestApi.Controllers
     public class ValuesController : ApiController
     {
         static internal string lastPut = "", lastPost = "";
-        static internal string[] value;
+
         // GET api/values
         public IEnumerable<string> Get()
         {
-            value = new string[] { $"Post:[{lastPost}]", $"Put:[{lastPut}]" };
-            return value;
+            return new string[] { $"Post:[{lastPost}]", $"Put:[{lastPut}]" };
         }
 
         // GET api/values/5
